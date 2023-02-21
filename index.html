@@ -16,11 +16,10 @@
     <a-scene>
 
       <a-assets>
-        <a-asset-item id="robot" src="robot.glb"></a-asset-item>
+        <a-asset-item id="muletto" src="muletto.glb"></a-asset-item>
       </a-assets>
-      <a-entity gltf-model="#robot" id="robot-1" modify-materials scale="0.01 0.01 0.01" position="1 1.5 -3"></a-entity>
+      <a-entity gltf-model="#muletto" id="muletto-1" modify-materials scale="0.02 0.02 0.02" position="-0.15 1 -2.5" rotation="0 -65 0"></a-entity>
 
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#3bb3ad"></a-plane>
       <a-sky color="whitesmoke"></a-sky>
 
     </a-scene>
@@ -115,22 +114,22 @@
     }
   });
 
-  var robot = sceneEl.querySelector("#robot-1")
+  var muletto = sceneEl.querySelector("#muletto-1")
   
   // ANIMATION 1
-  robot.setAttribute('animation__1_1', {
+  muletto.setAttribute('animation__1_1', {
     'property': 'position',
     'to': { x: 0.5, y: 0.75, z: -3.5 },
     'startEvents': 'startanim1_1',
     'dur': 1000,
   });
-  robot.setAttribute('animation__1_2', {
+  muletto.setAttribute('animation__1_2', {
     'property': 'rotation',
     'to': { x: 45, y: 70, z: 15 },
     'startEvents': 'startanim1_2',
     'dur': 1000,
   });
-  robot.setAttribute('animation__1_3', {
+  muletto.setAttribute('animation__1_3', {
     'property': 'scale',
     'to': { x: 0.02, y: 0.02, z: 0.02 },
     'startEvents': 'startanim1_3',
@@ -138,19 +137,19 @@
   });
 
   // ANIMATION 2
-  robot.setAttribute('animation__2_1', {
+  muletto.setAttribute('animation__2_1', {
     'property': 'position',
     'to': { x: 1.5, y: 0.15, z: -5.5 },
     'startEvents': 'startanim2_1',
     'dur': 1000,
   });
-  robot.setAttribute('animation__2_2', {
+  muletto.setAttribute('animation__2_2', {
     'property': 'rotation',
     'to': { x: -35, y: 20, z: 95 },
     'startEvents': 'startanim2_2',
     'dur': 1000,
   });
-  robot.setAttribute('animation__2_3', {
+  muletto.setAttribute('animation__2_3', {
     'property': 'scale',
     'to': { x: 0.015, y: 0.015, z: 0.015 },
     'startEvents': 'startanim2_3',
@@ -159,16 +158,16 @@
 
   document.querySelector(".btn-1").addEventListener("click",() => {
     console.log("clicked")
-    robot.emit(`startanim1_1`, null, false)
-    robot.emit(`startanim1_2`, null, false)
-    robot.emit(`startanim1_3`, null, false)
+    muletto.emit(`startanim1_1`, null, false)
+    muletto.emit(`startanim1_2`, null, false)
+    muletto.emit(`startanim1_3`, null, false)
   })
 
   document.querySelector(".btn-2").addEventListener("click",() => {
     console.log("clicked")
-    robot.emit(`startanim2_1`, null, false)
-    robot.emit(`startanim2_2`, null, false)
-    robot.emit(`startanim2_3`, null, false)
+    muletto.emit(`startanim2_1`, null, false)
+    muletto.emit(`startanim2_2`, null, false)
+    muletto.emit(`startanim2_3`, null, false)
   })
 
 
