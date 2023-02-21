@@ -14,11 +14,16 @@
 <body>
   <div class="wrapper">
     <a-scene>
-
+      <a-camera wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
       <a-assets>
         <a-asset-item id="muletto" src="muletto.glb"></a-asset-item>
       </a-assets>
-      <a-entity gltf-model="#muletto" id="muletto-1" modify-materials scale="0.02 0.02 0.02" position="-0.15 1 -2.5" rotation="0 -65 0"></a-entity>
+      <a-entity 
+        gltf-model="#muletto" id="muletto-1"  
+        scale="0.02 0.02 0.02" position="-0.15 1 -2.5" rotation="0 -65 0" 
+        animation__1_2="property: rotation; to: 10 70 40; startEvents: startanim1_2" 
+        animation__2_2="property: rotation; to: 1 -40 -10; startEvents: startanim2_2"
+        ></a-entity>
 
       <a-sky color="whitesmoke"></a-sky>
 
@@ -117,21 +122,22 @@
   var muletto = sceneEl.querySelector("#muletto-1")
   
   // ANIMATION 1
+  //scale="0.02 0.02 0.02" position="-0.15 1 -2.5" rotation="0 -65 0"
   muletto.setAttribute('animation__1_1', {
     'property': 'position',
-    'to': { x: 0.5, y: 0.75, z: -3.5 },
+    'to': { x: -0.5, y: 0.75, z: -3.5 },
     'startEvents': 'startanim1_1',
     'dur': 1000,
   });
-  muletto.setAttribute('animation__1_2', {
-    'property': 'rotation',
-    'to': { x: 45, y: 70, z: 15 },
-    'startEvents': 'startanim1_2',
-    'dur': 1000,
-  });
+  // muletto.setAttribute('animation__1_2', {
+  //   'property': 'rotation',
+  //   'to': { x: 0, y: 70, z: 0 },
+  //   'startEvents': 'startanim1_2',
+  //   'dur': 1000,
+  // });
   muletto.setAttribute('animation__1_3', {
     'property': 'scale',
-    'to': { x: 0.02, y: 0.02, z: 0.02 },
+    'to': { x: 0.035, y: 0.035, z: 0.035 },
     'startEvents': 'startanim1_3',
     'dur': 1000,
   });
@@ -139,19 +145,20 @@
   // ANIMATION 2
   muletto.setAttribute('animation__2_1', {
     'property': 'position',
-    'to': { x: 1.5, y: 0.15, z: -5.5 },
+    'to': { x: 0.5, y: 0.25, z: -5 },
     'startEvents': 'startanim2_1',
     'dur': 1000,
   });
-  muletto.setAttribute('animation__2_2', {
-    'property': 'rotation',
-    'to': { x: -35, y: 20, z: 95 },
-    'startEvents': 'startanim2_2',
-    'dur': 1000,
-  });
+  // muletto.setAttribute('animation__2_2', {
+  //   'property': muletto.vec3Value,
+  //   // 'from': { x: 0, y: -1, z: 0 },
+  //   'to': { x: 0, y: -180, z: 0 },
+  //   'startEvents': 'startanim2_2',
+  //   'dur': 1000,
+  // });
   muletto.setAttribute('animation__2_3', {
     'property': 'scale',
-    'to': { x: 0.015, y: 0.015, z: 0.015 },
+    'to': { x: 0.045, y: 0.045, z: 0.045 },
     'startEvents': 'startanim2_3',
     'dur': 1000,
   });
@@ -161,6 +168,7 @@
     muletto.emit(`startanim1_1`, null, false)
     muletto.emit(`startanim1_2`, null, false)
     muletto.emit(`startanim1_3`, null, false)
+    console.log(muletto.object3D.rotation)
   })
 
   document.querySelector(".btn-2").addEventListener("click",() => {
@@ -168,7 +176,12 @@
     muletto.emit(`startanim2_1`, null, false)
     muletto.emit(`startanim2_2`, null, false)
     muletto.emit(`startanim2_3`, null, false)
+    console.log(muletto.object3D.rotation)
   })
+
+  setTimeout(() => {
+    console.log(muletto.object3D.rotation)
+  }, 150);
 
 
 
