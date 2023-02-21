@@ -32,17 +32,24 @@
 
     <div class="clickables">
       <div class="btn-back">BACK</div>
-      <div class="btn btn-1" data-btn="1">Animation 1</div>
-      <div class="btn btn-2" data-btn="2">Animation 2</div>
+      <div class="btn btn-1">Animation 1</div>
+      <div class="btn btn-2">Animation 2</div>
     </div>
 
     <div class="windows">
-      <div class="content content-1" data-content="1">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-        Rem explicabo voluptatum nobis debitis illum fugit veritatis eligendi at perferendis. Dignissimos.
+      <div class="content content-1">
+        <h1>Animation 1 - Focus</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+          Explicabo ratione autem fuga a qui error eos natus omnis nobis ab!
+        </p>
       </div>
-      <div class="content content-2" data-content="2">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+      <div class="content content-2">
+        <h1>Animation 2 - Focus</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Omnis maiores libero assumenda eligendi labore doloremque voluptas deserunt soluta ad eius.
+        </p>
       </div>
     </div>
 
@@ -77,6 +84,34 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: baseline;
+  }
+  .windows {
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    max-width: 300px;
+  }
+  .content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--white);
+    color: var(--dark);
+    border: 2px solid var(--blue);
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    transition: all ease-in-out .25s;
+  }
+  .content.active {
+    opacity: 1;
+    pointer-events: initial;
+    user-select: initial;
   }
   .btn {
     padding: 0.25rem 1.5rem;
@@ -125,7 +160,6 @@
     pointer-events: initial;
     user-select: initial;
   }
-
   .clickables.disabled {
     opacity: 0;
     pointer-events: none;
@@ -179,11 +213,13 @@
     'dur': 1000,
   });
 
-  function setBack() {
+  function setBack(num) {
     document.querySelectorAll(".btn").forEach(element => {
       element.classList.add("disabled")
     });
     document.querySelector(".btn-back").classList.add("active")
+    document.querySelector(".content.active")?.classList.remove("active")
+    document.querySelector(".content-"+num).classList.add("active")
   }
 
   function goBack() {
@@ -191,20 +227,21 @@
       element.classList.remove("disabled")
     });
     document.querySelector(".btn-back").classList.remove("active")
+    document.querySelector(".content.active")?.classList.remove("active")
   }
 
   document.querySelector(".btn-1").addEventListener("click",() => {
     muletto.emit(`startanim1_1`, null, false)
     muletto.emit(`startanim1_2`, null, false)
     muletto.emit(`startanim1_3`, null, false)
-    setBack()
+    setBack(1)
   })
 
   document.querySelector(".btn-2").addEventListener("click",() => {
     muletto.emit(`startanim2_1`, null, false)
     muletto.emit(`startanim2_2`, null, false)
     muletto.emit(`startanim2_3`, null, false)
-    setBack()
+    setBack(2)
   })
 
   document.querySelector(".btn-back").addEventListener("click", () => {
