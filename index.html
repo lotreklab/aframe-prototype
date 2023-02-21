@@ -21,6 +21,7 @@
       <a-entity 
         gltf-model="#muletto" id="muletto-1"  
         scale="0.02 0.02 0.02" position="-0.15 1 -2.5" rotation="0 -65 0" 
+        animation__0_2="property: rotation; to: 0 -65 0; startEvents: startanim0_2"
         animation__1_2="property: rotation; to: 10 70 40; startEvents: startanim1_2" 
         animation__2_2="property: rotation; to: 1 -40 -10; startEvents: startanim2_2"
         ></a-entity>
@@ -30,7 +31,7 @@
     </a-scene>
 
     <div class="clickables">
-      <!-- elementi UI; tipo EXIT/BACK -->
+      <div class="btn-back">BACK</div>
       <div class="btn btn-1" data-btn="1">Animation 1</div>
       <div class="btn btn-2" data-btn="2">Animation 2</div>
     </div>
@@ -89,8 +90,35 @@
     justify-content: center;
     cursor: pointer;
     margin-bottom: 0.5rem;
+    transition: all ease-in-out .25s;
   }
-  .btn {}
+  .btn-back {
+    padding: 0.25rem 1.5rem;
+    color: var(--white);
+    background-color: var(--blue);
+    border: 2px solid var(--dark);
+    border-radius: 0.5rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    transition: all ease-in-out .25s;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  .btn-back.active {
+    opacity: 1;
+    pointer-events: initial;
+    user-select: initial;
+  }
+  .btn.disabled {
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
 
   .clickables {
     opacity: 1;
@@ -107,34 +135,29 @@
 
 <script>
   var sceneEl = document.querySelector('a-scene')
-
-  AFRAME.registerComponent('modify-materials', {
-    init: function () {
-      // Wait for model to load.
-      this.el.addEventListener('model-loaded', () => {
-        // Grab the mesh / scene.
-        //const obj = this.el.getObject3D('mesh');
-        console.log("model is loaded")
-      });
-    }
-  });
-
   var muletto = sceneEl.querySelector("#muletto-1")
+
+  // ANIMATION 0 - DEFAULT
+  muletto.setAttribute('animation__0_1', {
+    'property': 'position',
+    'to': { x: -0.15, y: 1, z: -2.5 },
+    'startEvents': 'startanim0_1',
+    'dur': 1000,
+  });
+  muletto.setAttribute('animation__0_3', {
+    'property': 'scale',
+    'to': { x: 0.02, y: 0.02, z: 0.02 },
+    'startEvents': 'startanim0_3',
+    'dur': 1000,
+  });
   
   // ANIMATION 1
-  //scale="0.02 0.02 0.02" position="-0.15 1 -2.5" rotation="0 -65 0"
   muletto.setAttribute('animation__1_1', {
     'property': 'position',
     'to': { x: -0.5, y: 0.75, z: -3.5 },
     'startEvents': 'startanim1_1',
     'dur': 1000,
   });
-  // muletto.setAttribute('animation__1_2', {
-  //   'property': 'rotation',
-  //   'to': { x: 0, y: 70, z: 0 },
-  //   'startEvents': 'startanim1_2',
-  //   'dur': 1000,
-  // });
   muletto.setAttribute('animation__1_3', {
     'property': 'scale',
     'to': { x: 0.035, y: 0.035, z: 0.035 },
@@ -149,13 +172,6 @@
     'startEvents': 'startanim2_1',
     'dur': 1000,
   });
-  // muletto.setAttribute('animation__2_2', {
-  //   'property': muletto.vec3Value,
-  //   // 'from': { x: 0, y: -1, z: 0 },
-  //   'to': { x: 0, y: -180, z: 0 },
-  //   'startEvents': 'startanim2_2',
-  //   'dur': 1000,
-  // });
   muletto.setAttribute('animation__2_3', {
     'property': 'scale',
     'to': { x: 0.045, y: 0.045, z: 0.045 },
@@ -163,28 +179,40 @@
     'dur': 1000,
   });
 
+  function setBack() {
+    document.querySelectorAll(".btn").forEach(element => {
+      element.classList.add("disabled")
+    });
+    document.querySelector(".btn-back").classList.add("active")
+  }
+
+  function goBack() {
+    document.querySelectorAll(".btn").forEach(element => {
+      element.classList.remove("disabled")
+    });
+    document.querySelector(".btn-back").classList.remove("active")
+  }
+
   document.querySelector(".btn-1").addEventListener("click",() => {
-    console.log("clicked")
     muletto.emit(`startanim1_1`, null, false)
     muletto.emit(`startanim1_2`, null, false)
     muletto.emit(`startanim1_3`, null, false)
-    console.log(muletto.object3D.rotation)
+    setBack()
   })
 
   document.querySelector(".btn-2").addEventListener("click",() => {
-    console.log("clicked")
     muletto.emit(`startanim2_1`, null, false)
     muletto.emit(`startanim2_2`, null, false)
     muletto.emit(`startanim2_3`, null, false)
-    console.log(muletto.object3D.rotation)
+    setBack()
   })
 
-  setTimeout(() => {
-    console.log(muletto.object3D.rotation)
-  }, 150);
-
-
-
+  document.querySelector(".btn-back").addEventListener("click", () => {
+    muletto.emit(`startanim0_1`, null, false)
+    muletto.emit(`startanim0_2`, null, false)
+    muletto.emit(`startanim0_3`, null, false)
+    goBack()
+  })
 </script>
 
 </html>
