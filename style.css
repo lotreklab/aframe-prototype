@@ -2,16 +2,21 @@
   --black: #0A100D;
   --dark:  #266DD3;
   --blue:  #266DD3;
+  --purple: #5448C8;
   --white:   #FFFAFA;
   --yellow:   #FFE802;
-  --green:  #61988E;
+  --green:  #2EC4B6;
 }
 body {
   font-family: 'Kanit', sans-serif;
   font-weight: 400;
+  color: var(--black);
 }
 p {
   color: var(--black);
+}
+h2 {
+  color: var(--green);
 }
 .wrapper {
   position: relative;
@@ -81,7 +86,7 @@ p {
 .btn {
   padding: 0.5rem 1.5rem;
   color: var(--white);
-  background: var(--blue);
+  background: var(--green);
   border-radius: 0.2rem;
   z-index: 100;
   display: flex;
@@ -95,7 +100,7 @@ p {
 .btn-back {
   padding: 0.5rem 1.5rem;
   color: var(--white);
-  background-color: var(--blue);
+  background-color: var(--green);
   border-radius: 0.2rem;
   z-index: 100;
   display: flex;

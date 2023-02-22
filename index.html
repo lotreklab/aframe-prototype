@@ -25,6 +25,7 @@
         animation__0_2="property: rotation; to: 0 -65 0; startEvents: startanim0_2"
         animation__1_2="property: rotation; to: 10 70 40; startEvents: startanim1_2" 
         animation__2_2="property: rotation; to: 1 -40 -10; startEvents: startanim2_2"
+        animation__3_2="property: rotation; to: 7 20 -30; startEvents: startanim3_2"
         ></a-entity>
 
       <!-- <a-sky color="#FFFAFA"></a-sky> -->
@@ -45,6 +46,7 @@
       <div class="btn-back">BACK</div>
       <div class="btn btn-1">Animation 1</div>
       <div class="btn btn-2">Animation 2</div>
+      <div class="btn btn-3">Animation 3</div>
     </div>
 
     <div class="windows">
@@ -58,8 +60,13 @@
       <div class="content content-2">
         <h2>Animation 2 - Focus</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
           Omnis maiores libero assumenda eligendi labore doloremque voluptas deserunt soluta ad eius.
+        </p>
+      </div>
+      <div class="content content-3">
+        <h2>Animation 3 - Focus</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
         </p>
       </div>
     </div>
@@ -113,6 +120,20 @@
     'dur': 1000,
   });
 
+  // ANIMATION 3
+  muletto.setAttribute('animation__3_1', {
+    'property': 'position',
+    'to': { x: 0.65, y: 0.35, z: -3 },
+    'startEvents': 'startanim3_1',
+    'dur': 1000,
+  });
+  muletto.setAttribute('animation__3_3', {
+    'property': 'scale',
+    'to': { x: 0.055, y: 0.055, z: 0.055 },
+    'startEvents': 'startanim3_3',
+    'dur': 1000,
+  });
+
   function setBack(num) {
     document.querySelectorAll(".btn").forEach(element => {
       element.classList.add("disabled")
@@ -142,6 +163,13 @@
     muletto.emit(`startanim2_2`)
     muletto.emit(`startanim2_3`)
     setBack(2)
+  })
+
+  document.querySelector(".btn-3").addEventListener("click",() => {
+    muletto.emit(`startanim3_1`)
+    muletto.emit(`startanim3_2`)
+    muletto.emit(`startanim3_3`)
+    setBack(3)
   })
 
   document.querySelector(".btn-back").addEventListener("click", () => {
