@@ -3,12 +3,13 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Hello, World! - A-Frame</title>
-  <meta name="description" content="Hello, World! - A-Frame">
+  <title>Lotrek A-Frame Prototype</title>
+  <meta name="description" content="Lotrek A-Frame Prototype">
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -26,9 +27,19 @@
         animation__2_2="property: rotation; to: 1 -40 -10; startEvents: startanim2_2"
         ></a-entity>
 
-      <a-sky color="whitesmoke"></a-sky>
+      <!-- <a-sky color="#FFFAFA"></a-sky> -->
 
     </a-scene>
+
+    <div class="details">
+      <h1 class="details__title">
+        LOTREK
+        <br>
+        A-FRAME
+        <br>
+        PROTOTYPE
+      </h1>
+    </div>
 
     <div class="clickables">
       <div class="btn-back">BACK</div>
@@ -38,14 +49,14 @@
 
     <div class="windows">
       <div class="content content-1">
-        <h1>Animation 1 - Focus</h1>
+        <h2>Animation 1 - Focus</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
           Explicabo ratione autem fuga a qui error eos natus omnis nobis ab!
         </p>
       </div>
       <div class="content content-2">
-        <h1>Animation 2 - Focus</h1>
+        <h2>Animation 2 - Focus</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. 
           Omnis maiores libero assumenda eligendi labore doloremque voluptas deserunt soluta ad eius.
@@ -55,117 +66,6 @@
 
   </div>
 </body>
-
-<style>
-  :root {
-    --black: #081729;
-    --dark:  #24547d;
-    --blue:  #3bb3ad;
-    --white:   #ddebdd;
-  }
-  body {
-    font-family: 'Kanit', sans-serif;
-    font-weight: 400;
-  }
-  .wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  .clickables {
-    position: absolute;
-    top: 20%;
-    left: 5%;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    max-width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: baseline;
-  }
-  .windows {
-    position: absolute;
-    bottom: 20%;
-    right: 5%;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    max-width: 300px;
-  }
-  .content {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background-color: var(--white);
-    color: var(--dark);
-    border: 2px solid var(--blue);
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-    transition: all ease-in-out .25s;
-  }
-  .content.active {
-    opacity: 1;
-    pointer-events: initial;
-    user-select: initial;
-  }
-  .btn {
-    padding: 0.25rem 1.5rem;
-    color: var(--white);
-    background-color: var(--blue);
-    border: 2px solid var(--dark);
-    border-radius: 0.5rem;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin-bottom: 0.5rem;
-    transition: all ease-in-out .25s;
-  }
-  .btn-back {
-    padding: 0.25rem 1.5rem;
-    color: var(--white);
-    background-color: var(--blue);
-    border: 2px solid var(--dark);
-    border-radius: 0.5rem;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin-bottom: 0.5rem;
-    transition: all ease-in-out .25s;
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-  }
-  .btn-back.active {
-    opacity: 1;
-    pointer-events: initial;
-    user-select: initial;
-  }
-  .btn.disabled {
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .clickables {
-    opacity: 1;
-    pointer-events: initial;
-    user-select: initial;
-  }
-  .clickables.disabled {
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-  }
-</style>
 
 <script>
   var sceneEl = document.querySelector('a-scene')
@@ -231,23 +131,23 @@
   }
 
   document.querySelector(".btn-1").addEventListener("click",() => {
-    muletto.emit(`startanim1_1`, null, false)
-    muletto.emit(`startanim1_2`, null, false)
-    muletto.emit(`startanim1_3`, null, false)
+    muletto.emit(`startanim1_1`)
+    muletto.emit(`startanim1_2`)
+    muletto.emit(`startanim1_3`)
     setBack(1)
   })
 
   document.querySelector(".btn-2").addEventListener("click",() => {
-    muletto.emit(`startanim2_1`, null, false)
-    muletto.emit(`startanim2_2`, null, false)
-    muletto.emit(`startanim2_3`, null, false)
+    muletto.emit(`startanim2_1`)
+    muletto.emit(`startanim2_2`)
+    muletto.emit(`startanim2_3`)
     setBack(2)
   })
 
   document.querySelector(".btn-back").addEventListener("click", () => {
-    muletto.emit(`startanim0_1`, null, false)
-    muletto.emit(`startanim0_2`, null, false)
-    muletto.emit(`startanim0_3`, null, false)
+    muletto.emit(`startanim0_1`)
+    muletto.emit(`startanim0_2`)
+    muletto.emit(`startanim0_3`)
     goBack()
   })
 </script>
